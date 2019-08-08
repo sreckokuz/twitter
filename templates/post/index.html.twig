@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+    {% block left%}
+        {{ include('post/main-left.html.twig', {'user': user, 'allUsers': allUsers}) }}
+    {% endblock %}
+    {% block right %}
+        {{ include('post/main-right.html.twig', {'user': user})}}
+    {% endblock %}
+{% block middle %}
+    {% if is_granted('ROLE_USER') %}
+    <div class="w3-container w3-card w3-white w3-round w3-margin">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    </div>
+    {% endif %}
+    {% for post in posts %}
+        <!-- main content witch is used in show.html.twig too -->
+        {{ include('post/main.html.twig', {'post':post}) }}
+        <!-- Modal for delete tweet -->
+        {{ include('post/modalDelete.html.twig', {'post':post}) }}
+    {% endfor %}
+{% endblock %}
+

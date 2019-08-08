@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block left%}
+    <div class="w3-container ">
+    </div>
+    </div>
+{% endblock %}
+{% block right %}
+    <div class="w3-card w3-round w3-white w3-center">
+    </div>
+{% endblock %}
+
+    {% block middle %}
+<div class="w3-container w3-card w3-white w3-round w3-margin">
+{% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey }}
+            </div>
+        {% endif %}
+    <form method="POST" action="{{ path("security_login")}}" class="form-signin">
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" name="_username" id="inputUsername" class="form-control" placeholder="Username" required autofocus><br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" name="_target_path" value="{{ app.request.get('redirect') }}">
+    </form>
+</div>
+
+{% endblock %}
+{% block footer %} {% endblock %}

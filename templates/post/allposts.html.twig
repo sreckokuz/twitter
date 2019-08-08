@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block left %}
+    {{ include('post/main-left.html.twig', {'user': user, 'allUsers': allUsers}) }}
+{% endblock %}
+{% block right %}
+    {{ include('post/main-right.html.twig')}}
+{% endblock %}
+{% block middle %}
+    {% for post in allPosts %}
+    {{ include('post/main.html.twig', {'post': post, 'carbon': carbon}) }}
+    <!-- Modal for delete tweet -->
+    {{ include('post/modalDelete.html.twig', {'post':post}) }}
+    {% endfor %}
+{% endblock %}

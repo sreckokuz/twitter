@@ -1,0 +1,67 @@
+<div class="w3-container ">
+    <div class="w3-card w3-round w3-white">
+        {% if is_granted('ROLE_USER') %}
+        <div class="w3-container">
+            {#<p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>#}
+            <p class="w3-center">{{ user.fullName }}</p>
+            <hr>
+            <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+        </div>
+    </div>
+    <br>
+
+    <!-- Following -->
+    <div class="w3-card w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+            <p>Followring</p>
+            <p>
+                {% for following in user.followers %}
+                    <span class="w3-tag w3-theme-d5">@{{ following.username }}</span>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+    <br>
+
+    <div class="w3-card w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+            <p>Followring</p>
+            <p>
+                {% for followers in user.followers %}
+                    <span class="w3-tag w3-theme-d5">@{{ followers.username }}</span>
+                {% endfor %}
+            </p>
+            </p>
+        </div>
+    </div>
+    <br>
+
+    <!-- Followers -->
+    <div class="w3-card w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+            <p>All users</p>
+
+            {% for user in allUsers %}
+                <p>
+                    <span class="w3-tag w3-theme-d5">@{{ user.username }}</span>
+                </p>
+            {% endfor %}
+
+        </div>
+        {% else %}
+            <!-- Alert Box -->
+
+            <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+                <p><strong>Hey!</strong></p>
+                <p>People are looking at your profile. Find out who.</p>
+            </div>
+        {% endif %}
+    </div>
+    <br>
+</div>
+</div>

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block left %}
+    {{ include('post/main-left.html.twig', {'user': user, 'allUsers': allUsers}) }}
+{% endblock %}
+{% block right %}
+    {{ include('post/main-right.html.twig')}}
+{% endblock %}
+{% block middle %}
+    <div class="w3-container w3-card w3-white w3-round w3-margin">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+    <script>
+        document.getElementById("post_Add").innerHTML = "Edit tweet";
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+<div class="w3-container w3-card w3-white w3-round w3-margin" style="position:relative;"><br>
+    {#<img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">#}
+    <span class="w3-right w3-opacity">{{ carbon.create(post.updatedAt|date).diffForHumans() }}</span>
+        <a href="{{ path("all_user_tweets", {'id': post.user.id}) }}"><h4>@{{  post.user.username }}</h4></a>
+    <hr class="w3-clear">
+    <a href="{{ path('show_one_post', {'id': post.id}) }}">
+        <p>{{ post.content }}</p><br>
+        <button type="button" class="w3-button-small w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> (5)</button>
+        <button type="button" class="w3-button-small w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> (9)</button>
+        {% if is_granted('ROLE_USER') %}
+            <div class="post-right-buttons">
+                {% if is_granted('edit', post) %}
+                    <a href="{{ path('edit_post', {'id': post.id}) }}"><button class="w3-button-small w3-block w3-green w3-section"><span class="glyphicon glyphicon-edit"></span></button></a>
+                {% endif %}
+                {% if is_granted('delete', post) %}
+                    <button class="w3-button-small w3-block w3-red w3-section" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
+                {% endif %}
+            </div>
+        {% endif %}
+</div></a>
