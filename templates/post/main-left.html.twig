@@ -1,13 +1,15 @@
 <div class="w3-container ">
-    <div class="w3-card w3-round w3-white">
+    <div class=" w3-round w3-white">
         {% if is_granted('ROLE_USER') %}
+        <div class="w3-card" {% if app.user == user %} {{ "style='border: 4px solid rgba(102,213,150)'" }} {% endif %}>
         <div class="w3-container">
-            {#<p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>#}
+            <p class="w3-center"><img src="" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
             <p class="w3-center">{{ user.fullName }}</p>
             <hr>
             <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
             <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+        </div>
         </div>
     </div>
     <br>
@@ -17,8 +19,8 @@
         <div class="w3-container">
             <p>Followring</p>
             <p>
-                {% for following in user.followers %}
-                    <span class="w3-tag w3-theme-d5">@{{ following.username }}</span>
+                {% for following in user.following %}
+                    <a href="{{ path("all_user_tweets", {'id': following.id}) }}"><span class="w3-tag w3-theme-d5">@{{ following.username }}</span></a>
                 {% endfor %}
             </p>
         </div>
@@ -27,10 +29,10 @@
 
     <div class="w3-card w3-round w3-white w3-hide-small">
         <div class="w3-container">
-            <p>Followring</p>
+            <p>Followers</p>
             <p>
                 {% for followers in user.followers %}
-                    <span class="w3-tag w3-theme-d5">@{{ followers.username }}</span>
+                    <a href="{{ path('all_user_tweets', {'id': followers.id}) }}"><span class="w3-tag w3-theme-d5">@{{ followers.username }}</span></a>
                 {% endfor %}
             </p>
             </p>
@@ -45,7 +47,7 @@
 
             {% for user in allUsers %}
                 <p>
-                    <span class="w3-tag w3-theme-d5">@{{ user.username }}</span>
+                    <a href="{{ path("all_user_tweets", {'id': user.id }) }}"><span class="w3-tag w3-theme-d5">@{{ user.username }}</span></a>
                 </p>
             {% endfor %}
 
@@ -65,3 +67,4 @@
     <br>
 </div>
 </div>
+

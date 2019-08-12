@@ -59,30 +59,181 @@
         0%   {opacity: 1;}
         100% {opacity: 0; display:none;}
     }
+    #nav-manual{
+        height: 49px;
+        padding-left: 35px;
+        padding-right: 20px;
+    }
+    #log-in-user {
+        background-color: rgba(102,213,150);
+    }
+    .search{display: inline; width: 120px; height: 8px;}
+        input{border:none;padding:10px;border-radius:20px; width: 120px; height: 6px; font-size: 15px; }
+    button{border:none;border-radius:20px;}
+
+    #search-form {
+        padding: 10px;
+        display: inline-block;
+    }
+    .glyphicon {
+        top: 2px;
+    }
+    .w3-bar-item {
+        text-decoration: none !important;
+    }
+    .w3-container a{
+        text-decoration: none;
+    }
+    .w3-container a:hover{
+        color: black;
+    }
+    #left-side{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 60px;
+    }
+    #right-side{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 60px;
+    }
+    .w3-card{
+        padding-top: 15px;
+    }
+    #button-fol-unf {
+        font-size: 16px;
+    }
+    #button-fol-unf a:hover{
+        color: white !important;
+    }
+
+
+    .chart {
+        background: conic-gradient(#FAA43A 120deg, #5DA5DA 120deg 240deg, #B276B2 0);
+        border-radius: 50%;
+        width: 50%;
+        height: 0;
+        padding-top: 50%;
+        float: left;
+        padding-right: 20px;
+    }
+    .key {
+        width: 50%;
+        float: right;
+        list-style: none;
+        display: table;
+        border-collapse: separate;
+    }
+    .key > li {
+        display: table-row;
+    }
+    .key > li > * {
+        display: table-cell;
+        border-bottom: 12px solid #fff;
+    }
+    .percent {
+        color: #fff;
+        padding: 10px 2px;
+        text-shadow: 0 0 1px #000;
+        text-align: center;
+    }
+    .choice {
+        padding-left: 10px;
+    }
+    .red {
+        background: #f15854;
+    }
+    .gray {
+        background: #4d4d4d;
+    }
+    .blue {
+        background: #5da5da;
+    }
+    .yellow {
+        background: #decf3f;
+    }
+    .purple {
+        background: #b276b2;
+    }
+    .orange {
+        background: #faa43a;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+
+    #pie-chart-percent {
+        display: inline-block;
+        float: left;
+        margin-left: 15px;
+    }
+
+
+
+    .form-signin {
+        margin-top: 10%;
+    }
+    .form-signin input{
+        height: 40px;
+    }
+    .form-signin button {
+        height: 40px;
+        font-size: 16px;
+    }
+    #user  {
+        margin-top: 2%;
+    }
+    #user input {
+    height: 40px;
+}
+    #user .form-check-label {
+        margin-top: 11px;
+        margin-left: 10px;
+    }
+
+   #user #user_Register {
+       font-size: 16px;
+   }
+
+    #post_Add {
+        font-size: 14px;
+        background-color: #5DA5DA;
+    }
 </style>
 
 <body class="w3-theme-l5">
 <!-- Navbar -->
-<div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+<div class="w3-top" style="background-color: red">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large" id="nav-manual" >
+        <div class="w3-container">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-        <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>FakeTwitt</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-        <div class="w3-dropdown-hover w3-hide-small">
-            <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-            <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+        <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">FAKE TWIT</a>
+        <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Home"><i class="fa fa-home"></i></a>
+            {% if is_granted('ROLE_USER')%}
+        <a href="{{ path('all_user_tweets', {'id': app.user.id}) }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
+            {% else %}
+            <a href="{{ path('main_page')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
+            {% endif %}
+            <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-button w3-padding-large " title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
+            <div class="w3-dropdown-content w3-card-4 w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button">One new friend request</a>
                 <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
                 <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
             </div>
         </div>
-        {% if is_granted('ROLE_USER') %}
+            <div id="search-form">
+            <form class="search" action="search.php">
+                <input name="q" placeholder="Search..." type="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            </div>
+            {% if is_granted('ROLE_USER') %}
         <a href="{{ path('security_logout') }}" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-            <p>Logout</p>
+            <p><span class="glyphicon glyphicon-log-out"></span></p>
         </a>
-            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+            <a href="{{ path('all_user_tweets', {'id': app.user.id}) }}" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" id="log-in-user" title="Log out">
                 <p>{{ app.user.fullName }}</p>
             </a>
         {% else  %}
@@ -94,6 +245,7 @@
         </a>
 
         {% endif %}
+        </div>
     </div>
 </div>
 
@@ -106,12 +258,13 @@
     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 </div>
+
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
     <!-- The Grid -->
         <div class="w3-row">
         <!-- Left Column -->
-        <div class="w3-col m3">
+        <div class="w3-col m3" id="left-side">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} " id='flash-message'>
@@ -152,6 +305,15 @@
 </footer>
 {% endblock %}
 <script>
+
+
+    // var path = window.location.pathname.split("/").pop()    ;
+    // console.log(path);
+    // if(path == '') {
+    //
+    // }
+
+
     // Accordion
     function myFunction(id) {
         var x = document.getElementById(id);

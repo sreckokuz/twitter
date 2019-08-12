@@ -29,19 +29,34 @@ class PostController extends AbstractController
             $post->setUser($user);
             $em->persist($post);
             $em->flush();
+            $this->addFlash('success', 'You added a tweet');
             return $this->redirectToRoute('main_page');
         }
 
         //get all posts
-        $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['updatedAt'=>'DESC']);
-        /** @var User $user */
-        $user = $this->getUser();
+        $currentUser = $this->getUser();
+        $countOfAllUserPosts=0;
+        $usersWith5PostsAndMores = 0;
+        if($currentUser instanceof User) {
+
+            $arrayOfUsers = $currentUser->getFollowing();
+
+            $allPosts = $this->getDoctrine()->getRepository(Post::class)->findAllUsersFollowingPosts($arrayOfUsers, $currentUser->getId());
+            $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
+            $countOfAllUserPosts = $currentUser->getPosts()->count();
+
+        }
+        else{
+            $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['updatedAt'=>'DESC']);
+        }
         return $this->render('post/index.html.twig', [
             'posts' => $allPosts,
             'form' => $form->createView(),
             'carbon'=> new Carbon(),
-            'user' => $user,
-            'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll()
+            'user' => $currentUser,
+            'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+            'count' => $countOfAllUserPosts,
+            'usersWith5PostsAndMore' => $usersWith5PostsAndMore
         ]);
     }
 
@@ -49,6 +64,10 @@ class PostController extends AbstractController
      * @Route("/edit/{id}", name="edit_post")
      */
     public function edit(Post $post, Request $request) {
+        $count=0;
+        $count = $this->getUser()->getPosts()->count();
+        $usersWith5PostsAndMore = 0;
+        $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         $this->denyAccessUnlessGranted('edit', $post);
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -62,7 +81,10 @@ class PostController extends AbstractController
             [
                 'form'=> $form->createView(),
                 'user' => $this->getUser(),
-                'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll()
+                'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+                'count' => $count,
+                'usersWith5PostsAndMore' => $usersWith5PostsAndMore
+
             ]);
     }
 
@@ -85,12 +107,18 @@ class PostController extends AbstractController
      * @Security("is_granted('ROLE_USER')", message="Log in first")
      */
     public function show(Post $post) {
+        $count=0;
+        $count = $this->getUser()->getPosts()->count();
+        $usersWith5PostsAndMore = 0;
+        $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         return $this->render('post/show.html.twig',
             [
                 'post'=>$post, 'carbon'=> new Carbon(),
                 'user' => $this->getUser(),
-                'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll()
-        ]);
+                'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+                'count' => $count,
+                'usersWith5PostsAndMore' => $usersWith5PostsAndMore
+        ,]);
     }
 
     /**
@@ -99,13 +127,19 @@ class PostController extends AbstractController
      */
     public function userPosts(User $user) {
         $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy(['user'=>$user], ['createdAt'=>'DESC']);
+        $count=0;
+        $count = $this->getUser()->getPosts()->count();
+        $usersWith5PostsAndMore = 0;
+        $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
 
         return $this->render('post/allposts.html.twig',
             [
                 'allPosts' => $allPosts,
                 'carbon'=> new Carbon(),
                 'user' => $user,
-                'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll()
+                'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+                'count' => $count,
+                'usersWith5PostsAndMore' => $usersWith5PostsAndMore
             ]);
     }
 }

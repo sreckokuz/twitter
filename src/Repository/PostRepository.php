@@ -47,4 +47,16 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllUsersFollowingPosts($users, $current_user) {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.user = :users')
+            ->orWhere('p.user = :current_user')
+            ->setParameter('current_user', $current_user)
+            ->setParameter('users', $users)
+            ->orderBy('p.updatedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -47,4 +47,26 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+//    not in use query()
+    public function countOfAllUserPosts() {
+        return $this->createQueryBuilder('u')
+            ->select('count(u)')
+            ->innerJoin('u.posts', 'mp')
+            ->andWhere('u.id=1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function usersWithMoreThan5Posts() {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.posts', 'p')
+            ->groupBy('u')
+            ->having('count(p)>5')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
+
+

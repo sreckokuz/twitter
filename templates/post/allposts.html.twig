@@ -3,7 +3,7 @@
     {{ include('post/main-left.html.twig', {'user': user, 'allUsers': allUsers}) }}
 {% endblock %}
 {% block right %}
-    {{ include('post/main-right.html.twig')}}
+    {{ include('post/main-right.html.twig', {'user': user})}}
 {% endblock %}
 {% block middle %}
     {% for post in allPosts %}
