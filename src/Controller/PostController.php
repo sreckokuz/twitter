@@ -36,7 +36,7 @@ class PostController extends AbstractController
         //get all posts
         $currentUser = $this->getUser();
         $countOfAllUserPosts=0;
-        $usersWith5PostsAndMores = 0;
+        $usersWith5PostsAndMore = 0;
         if($currentUser instanceof User) {
 
             $arrayOfUsers = $currentUser->getFollowing();
@@ -64,9 +64,7 @@ class PostController extends AbstractController
      * @Route("/edit/{id}", name="edit_post")
      */
     public function edit(Post $post, Request $request) {
-        $count=0;
         $count = $this->getUser()->getPosts()->count();
-        $usersWith5PostsAndMore = 0;
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         $this->denyAccessUnlessGranted('edit', $post);
         $form = $this->createForm(PostType::class, $post);
@@ -107,9 +105,7 @@ class PostController extends AbstractController
      * @Security("is_granted('ROLE_USER')", message="Log in first")
      */
     public function show(Post $post) {
-        $count=0;
         $count = $this->getUser()->getPosts()->count();
-        $usersWith5PostsAndMore = 0;
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         return $this->render('post/show.html.twig',
             [
@@ -127,9 +123,7 @@ class PostController extends AbstractController
      */
     public function userPosts(User $user) {
         $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy(['user'=>$user], ['createdAt'=>'DESC']);
-        $count=0;
         $count = $this->getUser()->getPosts()->count();
-        $usersWith5PostsAndMore = 0;
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
 
         return $this->render('post/allposts.html.twig',

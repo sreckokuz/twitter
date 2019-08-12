@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block left %}
-    {{ include('post/main-left.html.twig', {'user': user, 'allUsers': allUsers}) }}
+    {{ include('post/main-left.html.twig') }}
 {% endblock %}
 {% block right %}
-    {{ include('post/main-right.html.twig', {'user': user})}}
+    {{ include('post/main-right.html.twig')}}
 {% endblock %}
 {% block middle %}
     {% for post in allPosts %}
-    {{ include('post/main.html.twig', {'post': post, 'carbon': carbon}) }}
+    {{ include('post/main.html.twig') }}
     <!-- Modal for delete tweet -->
     {{ include('post/modalDelete.html.twig', {'post':post}) }}
     {% endfor %}
