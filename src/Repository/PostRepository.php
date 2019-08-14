@@ -55,7 +55,7 @@ class PostRepository extends ServiceEntityRepository
             ->orWhere('p.user = :current_user')
             ->setParameter('current_user', $current_user)
             ->setParameter('users', $users)
-            ->orderBy('p.updatedAt', 'DESC')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
     }

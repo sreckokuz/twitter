@@ -1,12 +1,14 @@
 <div class="w3-container w3-card w3-white w3-round w3-margin" style="position:relative;"><br>
     {#<img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">#}
-    <span class="w3-right w3-opacity">{{ carbon.create(post.updatedAt|date).diffForHumans() }}</span>
+    <span class="w3-right w3-opacity">{{ carbon.create(post.createdAt|date).diffForHumans() }}</span>
         <a href="{{ path("all_user_tweets", {'id': post.user.id}) }}"><h4>@{{  post.user.username }}</h4></a>
     <hr class="w3-clear">
     <a href="{{ path('show_one_post', {'id': post.id}) }}">
-        <p>{{ post.content }}</p><br>
-        <button type="button" class="w3-button-small w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> (5)</button>
-        <button type="button" class="w3-button-small w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> (9)</button>
+        <p>{{ post.content }}</p></a><br>
+    {%  set isLiked = post.getLikedBy.contains(app.user) %}
+        <button onclick="likedPost({{ post.id }})" style="display: {% if not isLiked %} inline {% else %} none {% endif %}" id="like" type="button" class="w3-button-small w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i><span class="badge" id="like-count">{{ post.getLikedBy.count}}</span> </button>
+        <button onclick="unlikePost({{ post.id }})" id="unlike" type="button" class="w3-button-small w3-theme-d1 w3-margin-bottom" style="display: {% if isLiked %} inline {% else %} none {% endif %};color:black !important; background-color: rgba(200,213,228) !important"><i class="fa fa-thumbs-up"  style="color: rgba(86,130,248)"></i> <span class="badge" id="unlike-count">{{ post.getLikedBy.count }}</span> </button>
+        <button type="button" class="w3-button-small w3-theme-d2 w3-margin-bottom" style="display: inline"><i class="fa fa-comment"></i><span class="badge badge">9</span></button>
         {% if is_granted('ROLE_USER') %}
             <div class="post-right-buttons">
                 {% if is_granted('edit', post) %}
@@ -17,4 +19,58 @@
                 {% endif %}
             </div>
         {% endif %}
-</div></a>
+</div>
+<script>
+
+    var likeButton = document.getElementById('like');
+    var unlikeButton = document.getElementById('unlike');
+
+    function switchButtons(button, opositeButton) {
+        button.disabled = false;
+        button.style.display = 'none';
+        opositeButton.style.display= 'inline';
+    }
+
+    function likedPost(id) {
+        var post_id = id;
+        var likeCount = document.getElementById('like-count').innerText;
+        var url = '{{ path("like_post", {'id': 'post_i'}) }}';
+        url = url.replace("post_i", post_id);
+        // console.log(url);
+        {% if not app.user %}
+            return window.location.replace('{{ path('security_login') }}');
+        {% endif %}
+        fetch(url, {'credentials': 'include'}).then(function (response) {
+            response.json().then(function (json) {
+                likeCount=json.count;
+                $('#srk').load(location.href + ' #srk');
+
+
+            })
+        }).catch(function () {
+            console.log('some error in like post script')
+        });
+
+    }
+    function unlikePost(id) {
+        var post_id = id;
+        var likeCount = document.getElementById('like-count').innerText;
+        var url = '{{ path("unlike_post", {'id': 'post_i'}) }}';
+        url = url.replace("post_i", post_id);
+        // console.log(url);
+        fetch(url, {'credentials': 'include'}).then(function (response) {
+            response.json().then(function (json) {
+                likeCount=json.count;
+                $('#srk').load(location.href + ' #srk');
+
+            })
+        }).catch(function () {
+            console.log('some error in unlike post script')
+        });
+
+    }
+
+
+
+
+</script>

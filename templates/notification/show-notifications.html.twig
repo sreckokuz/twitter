@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+    {% block left%}
+        {{ include('post/main-left.html.twig') }}
+    {% endblock %}
+    {% block right %}
+        {{ include('post/main-right.html.twig')}}
+    {% endblock %}
+{% block middle %}
+    {% if likeNotifications|length>0 %}
+
+    <div class="w3-container w3-card w3-white w3-round w3-margin" id="notification-box">
+        <div class="card">
+            <div class="card-body">
+                <center>Unread notifications<center>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for likeNotification in likeNotifications %}
+                    <li class="list-group-item">
+                        <a href="{{ path("single_notification_mark", {'id':likeNotification.id}) }}" class="btn btn-sm btn-primary float-lg-right">OK</a>
+                            <a href="{{ path("all_user_tweets", {'id':likeNotification.likedBy.id}) }}">@{{ likeNotification.likedBy.username }} </a>
+                            likes your <a href="{{ path("show_one_post", {'id':likeNotification.post.id}) }}">post</a>
+                    </li>
+                {% endfor %}
+                <li class="list-group-item">
+                    <a href="{{ path("all_notifications_mark") }}" class="btn btn-block btn-lg btn-link btn-outline-info">Mark all as read</a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+    {% else %}
+        <div class="w3-container w3-card w3-white w3-round w3-margin">
+            <div class="card">
+        <div class="card-body">
+           <center> You have no notifications<center>
+        </div>
+            </div>
+            <br>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

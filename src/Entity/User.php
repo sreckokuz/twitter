@@ -79,11 +79,18 @@ class User implements UserInterface, \Serializable
      */
     private $followers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Post", mappedBy="likedBy")
+     */
+    private $postsLiked;
+
     public function __construct()
     {
+        $this->roles = [self::ROLE_USER];
         $this->posts = new ArrayCollection();
         $this->following = new ArrayCollection();
         $this->followers = new ArrayCollection();
+        $this->postsLiked = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -315,6 +322,34 @@ class User implements UserInterface, \Serializable
         if ($this->followers->contains($follower)) {
             $this->followers->removeElement($follower);
             $follower->removeFollowing($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPostsLiked(): Collection
+    {
+        return $this->postsLiked;
+    }
+
+    public function addPostsLiked(Post $postsLiked): self
+    {
+        if (!$this->postsLiked->contains($postsLiked)) {
+            $this->postsLiked[] = $postsLiked;
+            $postsLiked->addLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostsLiked(Post $postsLiked): self
+    {
+        if ($this->postsLiked->contains($postsLiked)) {
+            $this->postsLiked->removeElement($postsLiked);
+            $postsLiked->removeLikedBy($this);
         }
 
         return $this;

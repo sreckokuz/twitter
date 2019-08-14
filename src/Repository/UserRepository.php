@@ -67,6 +67,18 @@ class UserRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function allUsersExceptCurrentLogInUser(User $user) {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->innerJoin('u.posts', 'p')
+            ->groupBy('u')
+            ->having('count(p)>5')
+            ->andWhere('u != :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
 
 

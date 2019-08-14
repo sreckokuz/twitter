@@ -200,6 +200,36 @@
         font-size: 14px;
         background-color: #5DA5DA;
     }
+    #notif-button{
+        border-radius: 0px;
+        padding-right: 20px !important;
+        color: white;
+    }
+    #notif-button:hover{
+        background-color: white !important;
+    }
+    #notification-box{
+        padding: 40px;
+    }
+    #notification-box .list-group-item {
+        padding: 10px 50px;
+    rgb(73,99,112)
+    }
+    #notification-box .btn {
+        background-color:rgb(73,99,112);
+        color: white;
+        text-decoration: none;
+    }
+    #notification-box .btn:hover {
+        background-color:white;
+        color: black;
+    }
+    .w3-theme-d5 {
+        background-color:rgb(73,99,112) !important;
+    }
+    #not-badge {
+        background-color: rgba(102,213,150) !important;
+    }
 </style>
 
 <body class="w3-theme-l5">
@@ -215,14 +245,8 @@
             {% else %}
             <a href="{{ path('main_page')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
             {% endif %}
-            <div class="w3-dropdown-hover w3-hide-small">
-            <button class="w3-button w3-padding-large " title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-            <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-                <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-                <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-                <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-            </div>
-        </div>
+            <a href="{{ path("show_notifications") }}"><button id="notif-button" class="w3-button w3-padding-large " title="Notifications"><i class="fa fa-bell"></i>
+                    <span class="w3-badge w3-right w3-small" id="not-badge"><span id="notification-count"></span></span></button></a>
             <div id="search-form">
             <form class="search" action="search.php">
                 <input name="q" placeholder="Search..." type="search">
@@ -262,7 +286,7 @@
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
     <!-- The Grid -->
-        <div class="w3-row">
+        <div class="w3-row" id="srk">
         <!-- Left Column -->
         <div class="w3-col m3" id="left-side">
             {% for label, messages in app.flashes %}
@@ -277,7 +301,7 @@
             {% endblock %}
 
             <!-- Middle Column -->
-        <div class="w3-col m6">
+        <div class="w3-col m6" >
             {% block middle %}
             {% endblock %}
         </div>
@@ -303,6 +327,7 @@
 <footer class="w3-container w3-theme-d5">
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
+
 {% endblock %}
 <script>
 
@@ -337,9 +362,29 @@
         }
     }
 </script>
+
+    <script>
+        {% if(is_granted('ROLE_USER')) %}
+        function fetchNotificationCount() {
+            var countHtml = document.getElementById('notification-count');
+            //console.log(countHtml);
+            var path = '{{ path("notification_count") }}';
+                fetch(path, {'credentials': 'include'}).then(function (response) {
+                response.json().then(function (json) {
+                    document.getElementById('notification-count').innerText = json.notification;
+                    setTimeout(fetchNotificationCount, 5000)
+                })
+            }).catch(function () {
+                console.log('Some error in notification script');
+            })
+        }
+        fetchNotificationCount()
+        {% endif %}
+    </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 </body>
 </html>

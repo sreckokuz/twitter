@@ -47,7 +47,7 @@ class PostController extends AbstractController
 
         }
         else{
-            $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['updatedAt'=>'DESC']);
+            $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['createdAt'=>'DESC']);
         }
         return $this->render('post/index.html.twig', [
             'posts' => $allPosts,

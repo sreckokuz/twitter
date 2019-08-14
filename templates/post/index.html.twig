@@ -15,7 +15,7 @@
     {% endif %}
     {% for post in posts %}
         <!-- main content witch is used in show.html.twig too -->
-        {{ include('post/main.html.twig', {'post':post}) }}
+        {{ include('post/main.html.twig') }}
         <!-- Modal for delete tweet -->
         {{ include('post/modalDelete.html.twig', {'post':post}) }}
     {% endfor %}
