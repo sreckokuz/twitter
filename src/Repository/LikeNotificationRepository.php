@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\LikeNotification;
+use App\Entity\Post;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -47,4 +49,16 @@ class LikeNotificationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function unlikeNotification(User $user, Post $post) {
+        return $this->createQueryBuilder('n')
+            ->update('App\Entity\LikeNotification', 'n')
+            ->set('n.seen', 'true')
+            ->where('n.user = :user')
+            ->andWhere('n.post = :post')
+            ->setParameter('user', $user)
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->execute();
+    }
 }

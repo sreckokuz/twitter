@@ -84,6 +84,11 @@ class User implements UserInterface, \Serializable
      */
     private $postsLiked;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LikeNotification", mappedBy="likedBy")
+     */
+    private $likeNotifications;
+
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
@@ -91,6 +96,7 @@ class User implements UserInterface, \Serializable
         $this->following = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->postsLiked = new ArrayCollection();
+        $this->likeNotifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -350,6 +356,37 @@ class User implements UserInterface, \Serializable
         if ($this->postsLiked->contains($postsLiked)) {
             $this->postsLiked->removeElement($postsLiked);
             $postsLiked->removeLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LikeNotification[]
+     */
+    public function getLikeNotifications(): Collection
+    {
+        return $this->likeNotifications;
+    }
+
+    public function addLikeNotification(LikeNotification $likeNotification): self
+    {
+        if (!$this->likeNotifications->contains($likeNotification)) {
+            $this->likeNotifications[] = $likeNotification;
+            $likeNotification->setLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikeNotification(LikeNotification $likeNotification): self
+    {
+        if ($this->likeNotifications->contains($likeNotification)) {
+            $this->likeNotifications->removeElement($likeNotification);
+            // set the owning side to null (unless already changed)
+            if ($likeNotification->getLikedBy() === $this) {
+                $likeNotification->setLikedBy(null);
+            }
         }
 
         return $this;

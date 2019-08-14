@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\LikeNotification;
+use App\Entity\Notification;
 use App\Event\LikeNotificationEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -34,7 +35,10 @@ class LikeNotificationSubscriber implements EventSubscriberInterface
     }
 
     public function onPostDislike(LikeNotificationEvent $event) {
-        
+        $user = $event->getPost()->getUser();
+        $post = $event->getPost();
+        $p = $this->manager->getRepository(LikeNotification::class)->unlikeNotification($user, $post);
+        $this->manager->flush();
     }
 
     public static function getSubscribedEvents()

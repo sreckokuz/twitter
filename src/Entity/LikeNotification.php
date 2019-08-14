@@ -9,13 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class LikeNotification extends Notification
 {
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Post")
      */
     private $post;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="likeNotifications")
      */
     private $likedBy;
 
