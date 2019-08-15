@@ -230,6 +230,15 @@
     #not-badge {
         background-color: rgba(102,213,150) !important;
     }
+    #colorElement{
+        background-color: rgba(200,213,228);
+        color: black;
+    }
+    #leftCardProfile{
+        position: relative;
+    }
+    button:focus {outline:0;}
+
 </style>
 
 <body class="w3-theme-l5">
@@ -248,8 +257,8 @@
             <a href="{{ path("show_notifications") }}"><button id="notif-button" class="w3-button w3-padding-large " title="Notifications"><i class="fa fa-bell"></i>
                     <span class="w3-badge w3-right w3-small" id="not-badge"><span id="notification-count"></span></span></button></a>
             <div id="search-form">
-            <form class="search" action="search.php">
-                <input name="q" placeholder="Search..." type="search">
+            <form class="search" action="{{ path("search") }}" method="get">
+                <input name="q" placeholder="Search user..." type="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
             </div>

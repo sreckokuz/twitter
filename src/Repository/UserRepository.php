@@ -19,36 +19,7 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
-//    not in use query()
+//   this query is not in use in app
     public function countOfAllUserPosts() {
         return $this->createQueryBuilder('u')
             ->select('count(u)')
@@ -74,6 +45,17 @@ class UserRepository extends ServiceEntityRepository
             ->groupBy('u')
             ->having('count(p)>5')
             ->andWhere('u != :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function searchUserByTitle($user)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.fullName LIKE :user')
+            ->orWhere('u.username LIKE :user')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();

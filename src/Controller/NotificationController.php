@@ -40,10 +40,6 @@ class NotificationController extends AbstractController
         $allLikeNotifications = $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
         $allLikeNotifications = $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
         $followNotifications = $this->getDoctrine()->getRepository(FollowNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
-//        dd($followNotifications);
-//        die();
-        //        dd($allLikeNotifications);
-//        die();
         return $this->render('notification/show-notifications.html.twig',
             [
                 'user' => $this->getUser(),

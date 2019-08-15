@@ -18,13 +18,13 @@
                     <li class="list-group-item">
                         <a href="{{ path("single_notification_mark", {'id':likeNotification.id}) }}" class="btn btn-sm btn-primary float-lg-right">OK</a>
                             <a href="{{ path("all_user_tweets", {'id':likeNotification.likedBy.id}) }}">@{{ likeNotification.likedBy.username }} </a>
-                            likes your <a href="{{ path("show_one_post", {'id':likeNotification.post.id}) }}">post</a>
+                            <span id="">likes</span> your <a href="{{ path("show_one_post", {'id':likeNotification.post.id}) }}">post</a>
                     </li>
                 {% endfor %}
                 {% for followNotification in followNotifications %}
                     <li class="list-group-item">
                         <a href="{{ path("single_notification_mark", {'id':followNotification.id}) }}" class="btn btn-sm btn-primary float-lg-right">OK</a>
-                        <a href="{{ path("all_user_tweets", {'id': followNotification.followedUser.id}) }}">@{{ followNotification.followedUser.username }} </a>follows you
+                        <a href="{{ path("all_user_tweets", {'id': followNotification.followedUser.id}) }}">@{{ followNotification.followedUser.username }} </a><span id="colorElement">follows</span> you
                     </li>
                 {% endfor %}
                 <li class="list-group-item">
