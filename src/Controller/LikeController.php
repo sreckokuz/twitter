@@ -25,8 +25,11 @@ class LikeController extends AbstractController
         $user = $this->getUser();
         $user->addPostsLiked($post);
         $this->getDoctrine()->getManager()->flush();
-        $likedPost = new LikeNotificationEvent($post, $user);
-        $eventDispatcher->dispatch(LikeNotificationEvent::NAME, $likedPost);
+        if($post->getUser() !== $user) {
+            $likedPost = new LikeNotificationEvent($post, $user);
+            $eventDispatcher->dispatch(LikeNotificationEvent::NAME, $likedPost);
+        }
+
         return new JsonResponse(['count' => $post->getLikedBy()->count()]);
     }
 

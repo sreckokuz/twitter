@@ -46,9 +46,15 @@ class Post
      */
     private $likedBy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LikeNotification", mappedBy="post", cascade={"persist", "remove"})
+     */
+    private $likeNotifications;
+
     public function __construct()
     {
         $this->likedBy = new ArrayCollection();
+        $this->likeNotifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,6 +127,37 @@ class Post
     public function setCreatedAt($createdAt): void
     {
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @return Collection|LikeNotification[]
+     */
+    public function getLikeNotifications(): Collection
+    {
+        return $this->likeNotifications;
+    }
+
+    public function addLikeNotification(LikeNotification $likeNotification): self
+    {
+        if (!$this->likeNotifications->contains($likeNotification)) {
+            $this->likeNotifications[] = $likeNotification;
+            $likeNotification->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikeNotification(LikeNotification $likeNotification): self
+    {
+        if ($this->likeNotifications->contains($likeNotification)) {
+            $this->likeNotifications->removeElement($likeNotification);
+            // set the owning side to null (unless already changed)
+            if ($likeNotification->getPost() === $this) {
+                $likeNotification->setPost(null);
+            }
+        }
+
+        return $this;
     }
 
 }

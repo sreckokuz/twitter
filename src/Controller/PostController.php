@@ -39,9 +39,7 @@ class PostController extends AbstractController
         $usersWith5PostsAndMore = 0;
         if($currentUser instanceof User) {
 
-            $arrayOfUsers = $currentUser->getFollowing();
-
-            $allPosts = $this->getDoctrine()->getRepository(Post::class)->findAllUsersFollowingPosts($arrayOfUsers, $currentUser->getId());
+            $allPosts = $this->getDoctrine()->getRepository(Post::class)->findAllUsersFollowingPosts($currentUser->getFollowing(), $currentUser->getId());
             $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
             $countOfAllUserPosts = $currentUser->getPosts()->count();
 

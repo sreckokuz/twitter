@@ -9,28 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class LikeNotification extends Notification
 {
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Post")
-     */
-    private $post;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="likeNotifications")
      */
     private $likedBy;
 
-    public function getPost(): ?Post
-    {
-        return $this->post;
-    }
-
-    public function setPost(?Post $post): self
-    {
-        $this->post = $post;
-
-        return $this;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="likeNotifications")
+     */
+    private $post;
 
     public function getLikedBy(): ?User
     {
@@ -40,6 +27,18 @@ class LikeNotification extends Notification
     public function setLikedBy(?User $likedBy): self
     {
         $this->likedBy = $likedBy;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
 
         return $this;
     }

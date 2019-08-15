@@ -89,6 +89,7 @@ class User implements UserInterface, \Serializable
      */
     private $likeNotifications;
 
+
     public function __construct()
     {
         $this->roles = [self::ROLE_USER];
@@ -391,4 +392,5 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\Notification;
 use App\Entity\User;
@@ -38,7 +39,10 @@ class NotificationController extends AbstractController
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         $allLikeNotifications = $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
         $allLikeNotifications = $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
-//        dd($allLikeNotifications);
+        $followNotifications = $this->getDoctrine()->getRepository(FollowNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
+//        dd($followNotifications);
+//        die();
+        //        dd($allLikeNotifications);
 //        die();
         return $this->render('notification/show-notifications.html.twig',
             [
@@ -46,7 +50,8 @@ class NotificationController extends AbstractController
                 'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
                 'count' => $count,
                 'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
-                'likeNotifications' => $allLikeNotifications
+                'likeNotifications' => $allLikeNotifications,
+                'followNotifications' => $followNotifications
                 ]);
     }
 

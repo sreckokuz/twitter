@@ -26,14 +26,15 @@ class AppFixtures extends Fixture
         [
             'username' => 'rob_smith',
             'email' => 'rob_smith@smith.com',
-            'password' => 'rob12345',
+            'password' => 'rob123',
+            'password' => 'rob123',
             'fullName' => 'Rob Smith',
             'roles' => ['ROLE_USER']
         ],
         [
             'username' => 'marry_gold',
             'email' => 'marry_gold@gold.com',
-            'password' => 'marry12345',
+            'password' => 'marry123',
             'fullName' => 'Marry Gold',
             'roles' => ['ROLE_USER']
         ],
