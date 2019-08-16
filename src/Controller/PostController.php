@@ -47,6 +47,7 @@ class PostController extends AbstractController
         else{
             $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['createdAt'=>'DESC']);
         }
+
         return $this->render('post/index.html.twig', [
             'posts' => $allPosts,
             'form' => $form->createView(),
@@ -133,5 +134,23 @@ class PostController extends AbstractController
                 'count' => $count,
                 'usersWith5PostsAndMore' => $usersWith5PostsAndMore
             ]);
+    }
+
+    /**
+     * @Route("edituser/{id}", name="edit_profile")
+     */
+    public function editProfile(User $user, Request $request) {
+//        dd($request);
+        $town = $request->request->get('town');
+        $job = $request->request->get('job');
+        $birth = $request->request->get('birth');
+        $dateOfBirth = new \DateTime($birth);
+//        dd($dateOfBirth);
+//        die();
+        $user->setBirth($dateOfBirth);
+        $user->setJob($job);
+        $user->setAddress($town);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('main_page');
     }
 }

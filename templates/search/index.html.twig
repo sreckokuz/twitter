@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
     {% block left%}
+        {% set markPage = 5 %}
         {{ include('post/main-left.html.twig') }}
     {% endblock %}
     {% block right %}
@@ -8,7 +9,9 @@
 {% block middle %}
     <div class="w3-container w3-card w3-white w3-round w3-margin" id="notification-box">
         {% if searchedUsers | length > 0 %}
-            {{ searchedUsers[0].username }} {{  searchedUsers[0].fullName }}
+            {% for i in 0..(searchedUsers | length)-1 %}
+            {{ searchedUsers[i].username }} {{  searchedUsers[i].fullName }}
+            {% endfor %}
         {% else %}
             User not founded. Enter <span id="colorElement">full name</span> or <span id="colorElement">username</span> to find user
         {% endif %}

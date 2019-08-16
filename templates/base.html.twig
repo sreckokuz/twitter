@@ -226,6 +226,7 @@
     }
     .w3-theme-d5 {
         background-color:rgb(73,99,112) !important;
+        margin: 3px
     }
     #not-badge {
         background-color: rgba(102,213,150) !important;
@@ -238,6 +239,9 @@
         position: relative;
     }
     button:focus {outline:0;}
+    #pageMark{
+
+    }
 
 </style>
 
@@ -259,6 +263,7 @@
             <div id="search-form">
             <form class="search" action="{{ path("search") }}" method="get">
                 <input name="q" placeholder="Search user..." type="search">
+                <input type="hidden" name="token" value="{{ csrf_token('search') }}"/>
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
             </div>

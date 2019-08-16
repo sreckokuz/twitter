@@ -89,6 +89,21 @@ class User implements UserInterface, \Serializable
      */
     private $likeNotifications;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $job;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $birth;
+
 
     public function __construct()
     {
@@ -389,6 +404,42 @@ class User implements UserInterface, \Serializable
                 $likeNotification->setLikedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getJob(): ?string
+    {
+        return $this->job;
+    }
+
+    public function setJob(?string $job): self
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getBirth()
+    {
+        return $this->birth;
+    }
+
+    public function setBirth(?\DateTimeInterface $birth)
+    {
+        $this->birth = $birth;
 
         return $this;
     }

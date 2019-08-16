@@ -27,7 +27,7 @@ class SearchController extends AbstractController
     public function search(Request $request) {
 
         $qresult = $this->getDoctrine()->getRepository(User::class)->searchUserByTitle($request->query->get('q'));
-        //dd($qresult);
+//        dd($qresult);
         /** @var User $user */
         $user = $this->getUser();
         $count = $user->getPosts()->count();
