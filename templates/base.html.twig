@@ -109,7 +109,7 @@
 
 
     .chart {
-        background: conic-gradient(#FAA43A 120deg, #5DA5DA 120deg 240deg, #B276B2 0);
+
         border-radius: 50%;
         width: 50%;
         height: 0;
@@ -239,9 +239,40 @@
         position: relative;
     }
     button:focus {outline:0;}
-    #pageMark{
+    #myModal .modal-header, .modal-body, .modal-footer {
+        background-color: rgba(200,213,228);
+        color: #205;
+    }
+    #myModal .btn-danger {
+        background-color: rgba(255,102,113);
+    }
+    #myModal .btn-success
+    {
+        background-color: rgba(102,213,150);
+    }
+
+    #editProfile .modal-header {
+        background-color: rgba(200,213,228);
 
     }
+    #editProfile button:hover {
+        border: 1px solid black;
+    }
+    #editProfile .btn-success
+    {
+        background-color: rgba(102,213,150);
+    }
+    #button-fol-unf
+    {
+        /*background-color: rgba(700,900,242);*/
+    }
+    #button-fol-unf:hover {
+        color: white;
+    }
+    #middleColumn .w3-card {
+        margin-left: 0px !important;
+    }
+
 
 </style>
 
@@ -315,8 +346,9 @@
             {% endblock %}
 
             <!-- Middle Column -->
-        <div class="w3-col m6" >
+        <div class="w3-col m6" id="middleColumn">
             {% block middle %}
+
             {% endblock %}
         </div>
 
@@ -385,8 +417,11 @@
             var path = '{{ path("notification_count") }}';
                 fetch(path, {'credentials': 'include'}).then(function (response) {
                 response.json().then(function (json) {
-                    document.getElementById('notification-count').innerText = json.notification;
+                    if (json.notification>0) {
+                        document.getElementById('notification-count').innerText = json.notification;
+                    }
                     setTimeout(fetchNotificationCount, 5000)
+
                 })
             }).catch(function () {
                 console.log('Some error in notification script');

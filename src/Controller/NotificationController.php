@@ -6,6 +6,8 @@ use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\Notification;
 use App\Entity\User;
+use App\Services\ChartService;
+use App\Services\PostLikesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,20 +36,18 @@ class NotificationController extends AbstractController
     /**
      * @Route("notofications/show", name="show_notifications")
      */
-    public function showNotifications() {
-        $count = $this->getUser()->getPosts()->count();
-        $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
-        $allLikeNotifications = $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
-        $allLikeNotifications = $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
-        $followNotifications = $this->getDoctrine()->getRepository(FollowNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]);
+    public function showNotifications(ChartService $chartService, PostLikesService $postLikesService) {
         return $this->render('notification/show-notifications.html.twig',
             [
                 'user' => $this->getUser(),
                 'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
-                'count' => $count,
-                'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
-                'likeNotifications' => $allLikeNotifications,
-                'followNotifications' => $followNotifications
+                'count' => $this->getUser()->getPosts()->count(),
+                'usersWith5PostsAndMore' => $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts(),
+                'likeNotifications' => $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]),
+                'followNotifications' => $this->getDoctrine()->getRepository(FollowNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]),
+                'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
+                'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+                'chartStatistic' => $chartService->getMostLikedUsersStatistic()
                 ]);
     }
 

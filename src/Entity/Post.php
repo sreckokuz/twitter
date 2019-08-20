@@ -50,10 +50,16 @@ class Post
      */
     private $likeNotifications;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     */
+    private $postComments;
+
     public function __construct()
     {
         $this->likedBy = new ArrayCollection();
         $this->likeNotifications = new ArrayCollection();
+        $this->postComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +159,37 @@ class Post
             // set the owning side to null (unless already changed)
             if ($likeNotification->getPost() === $this) {
                 $likeNotification->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getPostComments(): Collection
+    {
+        return $this->postComments;
+    }
+
+    public function addPostComment(Comment $postComment): self
+    {
+        if (!$this->postComments->contains($postComment)) {
+            $this->postComments[] = $postComment;
+            $postComment->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostComment(Comment $postComment): self
+    {
+        if ($this->postComments->contains($postComment)) {
+            $this->postComments->removeElement($postComment);
+            // set the owning side to null (unless already changed)
+            if ($postComment->getPost() === $this) {
+                $postComment->setPost(null);
             }
         }
 

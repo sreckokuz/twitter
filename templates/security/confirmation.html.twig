@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block left%}
+    <div class="w3-container ">
+    </div>
+    </div>
+{% endblock %}
+{% block right %}
+{% endblock %}
+
+    {% block middle %}
+        {% if user %}
+            <div class="w3-card w3-white w3-round w3-margin">
+                <center>Congratulation you successefuly confirm account.<br> Go to the link for registration.</center><br>
+            </div>
+        {% else %}
+            <div class="w3-card w3-white w3-round w3-margin">
+                <center> Something went wrong. Check your email.</center><br>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% block footer %} {% endblock %}

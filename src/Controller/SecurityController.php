@@ -28,4 +28,18 @@ class SecurityController extends AbstractController
     {
 
     }
+
+    /**
+     * @Route("confirm/{token}", name="confirmation_link")
+     */
+    public function confirm($token) {
+        /** @var User $user */
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['confirmationToken' => $token]);
+        if ($user !==null) {
+            $user->setEnabled(true);
+            $user->setConfirmationToken('');
+            $this->getDoctrine()->getManager()->flush();
+        }
+        return $this->render('security/confirmation.html.twig', ['user'=>$user]);
+    }
 }

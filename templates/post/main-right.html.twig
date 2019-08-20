@@ -30,31 +30,42 @@
             <br>
         </div>
         <br>
-
         <div class="w3-card w3-round w3-white w3-center">
             <div class="w3-container">
-                    <p>Most liked post</p>
-                <a href="{{ path("all_user_tweets", {'id': user.id }) }}"><span class="w3-tag w3-theme-d5">@{{ user.username }}</span></a>
+                    <p>One of most liked twett and his author</p>
+                {%    if mostLikedPost.likedBy.count>0 %}
+                <a href="{{ path("show_one_post", {'id': mostLikedPost.id }) }}"><span class="w3-tag w3-theme-d5">twett</span></a> from
+                <a href="{{ path("all_user_tweets", {'id': userWithMostLikedPost.id }) }}"><span class="w3-tag w3-theme-d5">@{{ userWithMostLikedPost.username }}</span></a>
+                {% else %}
+                    <span class="w3-tag w3-theme-d5">No liked tweets</span>
+                    {% endif %}
             </div>
             <br>
         </div>
         <br>
-
         <div class="w3-card w3-round w3-white w3-center">
             <div class="w3-container">
                 <p>Most liked users in % </p>
-                <div class="chart"></div>
+                <div class="chart" style="background: conic-gradient(#FAA43A {{ chartStatistic[0]*3.6 }}deg, #5DA5DA {{ chartStatistic[0]*3.6 }}deg {{ chartStatistic[0]*3.6+chartStatistic[2]*3.6 }}deg, #B276B2 0);"></div>
                 <br>
                 <div id="pie-chart-percent">
-                <strong class="percent orange">33%</strong>
-                <span class="choice">@john_doe</span><br><br>
+                <strong class="percent orange">{{ chartStatistic[0]|round }}%</strong>
+                    {% if chartStatistic[0]>0 %}
+                    <span class="choice">@{{ chartStatistic[1] }}</span><br><br>
+                    {% else %}
+                    <span class="choice">0 likes</span><br><br>
+                    {% endif %}
                 </div>
                 <div id="pie-chart-percent">
-                <strong class="percent blue">33%</strong>
-                <span class="choice">@rob_smith</span><br><br>
+                <strong class="percent blue">{{ chartStatistic[2]|round }}%</strong>
+                    {% if chartStatistic[2]>0 %}
+                <span class="choice">@{{ chartStatistic[3] }}</span><br><br>
+                    {% else %}
+                    <span class="choice">0 likes</span><br><br>
+                    {% endif %}
                 </div>
                 <div id="pie-chart-percent">
-                <strong class="percent purple">33%</strong>
+                <strong class="percent purple">{{ (100-chartStatistic[0]-chartStatistic[2])|round }}%</strong>
                 <span class="choice"> others</span>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Services\TokenGenerator;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -58,10 +59,15 @@ class AppFixtures extends Fixture
         'Did you watch the game yesterday?',
         'How was your day?'
     ];
+    /**
+     * @var TokenGenerator
+     */
+    private $tokenGenerator;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, TokenGenerator $tokenGenerator)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function load(ObjectManager $manager)
@@ -88,6 +94,11 @@ class AppFixtures extends Fixture
             $user->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']));
             $user->setFullName($userData['fullName']);
             $user->setRoles($userData['roles']);
+            $user->setAddress('London, UK');
+            $user->setBirth(new \DateTime());
+            $user->setJob('Designer, Ui');
+            $user->setEnabled('true');
+            $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(30));
             $this->addReference($userData['username'], $user);
             $manager->persist($user);
         }

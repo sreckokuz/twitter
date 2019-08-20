@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
+use App\Services\CommentService;
+use App\Services\ChartService;
+use App\Services\PostLikesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,7 +20,7 @@ class PostController extends AbstractController
     /**
      * @Route("/", name="main_page")
      */
-    public function index(Request $request)
+    public function index(Request $request, PostLikesService $postLikesService, ChartService $chartService)
     {
         //get form
         $post = new Post();
@@ -47,6 +50,9 @@ class PostController extends AbstractController
         else{
             $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['createdAt'=>'DESC']);
         }
+//        $p = $chartService->getMostLikedUsersStatistic();
+//        print_r($p);
+//        die();
 
         return $this->render('post/index.html.twig', [
             'posts' => $allPosts,
@@ -55,14 +61,18 @@ class PostController extends AbstractController
             'user' => $currentUser,
             'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
             'count' => $countOfAllUserPosts,
-            'usersWith5PostsAndMore' => $usersWith5PostsAndMore
+            'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
+            'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
+            'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+            'chartStatistic' => $chartService->getMostLikedUsersStatistic()
+
         ]);
     }
 
     /**
      * @Route("/edit/{id}", name="edit_post")
      */
-    public function edit(Post $post, Request $request) {
+    public function edit(Post $post, Request $request, PostLikesService $postLikesService, ChartService $chartService) {
         $count = $this->getUser()->getPosts()->count();
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         $this->denyAccessUnlessGranted('edit', $post);
@@ -80,8 +90,10 @@ class PostController extends AbstractController
                 'user' => $this->getUser(),
                 'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
                 'count' => $count,
-                'usersWith5PostsAndMore' => $usersWith5PostsAndMore
-
+                'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
+                'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
+                'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+                'chartStatistic' => $chartService->getMostLikedUsersStatistic()
             ]);
     }
 
@@ -103,28 +115,32 @@ class PostController extends AbstractController
      * @Route("/show/{id}", name="show_one_post")
      * @Security("is_granted('ROLE_USER')", message="Log in first")
      */
-    public function show(Post $post) {
+    public function show(Post $post, PostLikesService $postLikesService, ChartService $chartService) {
         $count = $this->getUser()->getPosts()->count();
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
+
+
         return $this->render('post/show.html.twig',
             [
                 'post'=>$post, 'carbon'=> new Carbon(),
                 'user' => $this->getUser(),
                 'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
                 'count' => $count,
-                'usersWith5PostsAndMore' => $usersWith5PostsAndMore
-        ,]);
+                'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
+                'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
+                'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+                'chartStatistic' => $chartService->getMostLikedUsersStatistic()
+                ,]);
     }
 
     /**
      * @Route("/user/{id}", name="all_user_tweets")
      * @Security("is_granted('ROLE_USER')")
      */
-    public function userPosts(User $user) {
+    public function userPosts(User $user, PostLikesService $postLikesService, ChartService $chartService) {
         $allPosts = $this->getDoctrine()->getRepository(Post::class)->findBy(['user'=>$user], ['createdAt'=>'DESC']);
         $count = $this->getUser()->getPosts()->count();
         $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
-
         return $this->render('post/allposts.html.twig',
             [
                 'allPosts' => $allPosts,
@@ -132,7 +148,10 @@ class PostController extends AbstractController
                 'user' => $user,
                 'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
                 'count' => $count,
-                'usersWith5PostsAndMore' => $usersWith5PostsAndMore
+                'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
+                'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
+                'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+                'chartStatistic' => $chartService->getMostLikedUsersStatistic()
             ]);
     }
 
@@ -151,6 +170,6 @@ class PostController extends AbstractController
         $user->setJob($job);
         $user->setAddress($town);
         $this->getDoctrine()->getManager()->flush();
-        return $this->redirectToRoute('main_page');
+        return $this->redirectToRoute('all_user_tweets', ['id' => $this->getUser()->getId()]);
     }
 }
