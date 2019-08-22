@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Services\ChartService;
-use App\Services\PostLikesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,7 +25,7 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="search")
      */
-    public function search(Request $request, PostLikesService $postLikesService, ChartService $chartService) {
+    public function search(Request $request, ChartService $chartService) {
 
         $qresult = $this->getDoctrine()->getRepository(User::class)->searchUserByTitle($request->query->get('q'));
 //        dd($qresult);
@@ -42,8 +41,7 @@ class SearchController extends AbstractController
                     'count' => $count,
                     'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
                     'searchedUsers' => $qresult,
-                    'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
-                    'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+                    'mostLikedPostAndUser' => $this->getDoctrine()->getRepository(Post::class)->mostLikedPostAndHisUser(),
                     'chartStatistic' => $chartService->getMostLikedUsersStatistic()
                 ]);
     }

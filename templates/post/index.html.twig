@@ -14,11 +14,22 @@
     {{ form_end(form) }}
     </div>
     {% endif %}
+    {% if posts %}
     {% for post in posts %}
         <!-- main content witch is used in show.html.twig too -->
         {{ include('post/main.html.twig') }}
         <!-- Modal for delete tweet -->
         {{ include('post/modalDelete.html.twig', {'post':post}) }}
     {% endfor %}
+    {% else %}
+        {% if not is_granted("ROLE_USER") %}
+<div class="w3-container w3-card w3-white w3-round w3-margin" style="position:relative;"><br>
+    <center>There are no twetts. Log in and be first who make twett.</center><br><br>
+</div>
+<div id="footer-brake"></div>
+        {% endif %}
+
+
+    {% endif %}
 {% endblock %}
 

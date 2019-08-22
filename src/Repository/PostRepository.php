@@ -58,6 +58,24 @@ class PostRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    public function mostLikedPostAndHisUser()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            select count(posts.id), users.username, posts.id
+            from posts
+            INNER JOIN post_user
+            on posts.id = post_user.post_id
+            INNER join users
+            on users.id = posts.user_id
+            group by posts.id
+            order by count(posts.id) DESC
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
 
 
 }

@@ -17,7 +17,7 @@ class PostType extends AbstractType
             ->add('content', TextareaType::class, ['attr' => ['placeholder' => 'Add tweet'],
                 'label' => false,
             ])
-            ->add('Add', SubmitType::class)
+            ->add('Twitt', SubmitType::class)
         ;
     }
 

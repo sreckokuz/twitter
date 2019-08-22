@@ -7,9 +7,13 @@
     {{ include('post/main-right.html.twig')}}
 {% endblock %}
 {% block middle %}
+    {% if allPosts %}
     {% for post in allPosts %}
     {{ include('post/main.html.twig') }}
     <!-- Modal for delete tweet -->
     {{ include('post/modalDelete.html.twig', {'post':post}) }}
     {% endfor %}
+    {% else %}
+        <div class="w3-card w3-white w3-round w3-margin"><center>You have no twetts !</center><br></div>
+    {% endif %}
 {% endblock %}

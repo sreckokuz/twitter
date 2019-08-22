@@ -29,7 +29,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Length(max=10, min="4")
+     * @Assert\Length(max=7, min="4")
      */
     private $username;
 

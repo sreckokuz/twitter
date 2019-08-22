@@ -1,7 +1,7 @@
 <div class="w3-container ">
     <div class=" w3-round w3-white ">
         {% if is_granted('ROLE_USER') %}
-        <div class="w3-card" {% if app.user == user %} {{ "style='border: 4px solid rgba(102,213,150)'" }} {% endif %} id="leftCardProfile">
+        <div class="w3-card" {% if app.user == user and markPage==1 %} {{ "style='border: 2px solid #745A85'" }} {% endif %} id="leftCardProfile">
         <div class="w3-container">
             {#<p class="w3-center"><img src="" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>#}
             <p class="w3-center">{{ user.fullName }}</p>
@@ -24,7 +24,7 @@
     <!-- Following -->
     <div class="w3-card w3-round w3-white w3-hide-small">
         <div class="w3-container">
-            <p>Followring</p>
+            <p>Following</p>
             <p>
                 {% for following in user.following %}
                     <a href="{{ path("all_user_tweets", {'id': following.id}) }}"><span class="w3-tag w3-theme-d5">@{{ following.username }}</span>
@@ -61,7 +61,7 @@
         {% else %}
             <!-- Alert Box -->
 
-            <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+            <div id="allert-dialog" class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
           <i class="fa fa-remove"></i>
         </span>

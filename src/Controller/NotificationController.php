@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\FollowNotification;
 use App\Entity\LikeNotification;
 use App\Entity\Notification;
+use App\Entity\Post;
 use App\Entity\User;
 use App\Services\ChartService;
-use App\Services\PostLikesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,7 +36,7 @@ class NotificationController extends AbstractController
     /**
      * @Route("notofications/show", name="show_notifications")
      */
-    public function showNotifications(ChartService $chartService, PostLikesService $postLikesService) {
+    public function showNotifications(ChartService $chartService) {
         return $this->render('notification/show-notifications.html.twig',
             [
                 'user' => $this->getUser(),
@@ -45,8 +45,7 @@ class NotificationController extends AbstractController
                 'usersWith5PostsAndMore' => $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts(),
                 'likeNotifications' => $this->getDoctrine()->getRepository(LikeNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]),
                 'followNotifications' => $this->getDoctrine()->getRepository(FollowNotification::class)->findBy(['seen'=>false, 'user'=>$this->getUser()]),
-                'mostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[0],
-                'userWithMostLikedPost' => $postLikesService->mostLikedPostAndHisUser()[1],
+                'mostLikedPostAndUser' => $this->getDoctrine()->getRepository(Post::class)->mostLikedPostAndHisUser(),
                 'chartStatistic' => $chartService->getMostLikedUsersStatistic()
                 ]);
     }
