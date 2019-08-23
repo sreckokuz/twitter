@@ -8,10 +8,14 @@ use App\Entity\Notification;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Services\ChartService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ */
 class NotificationController extends AbstractController
 {
     /**

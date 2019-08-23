@@ -32,7 +32,8 @@ class RegisterController extends AbstractController
             $em->flush();
             $userRegisterEvent = new UserRegisterEvent($user);
             $eventDispatcher->dispatch(UserRegisterEvent::NAME, $userRegisterEvent);
-            return $this->redirectToRoute('main_page');
+            $this->addFlash('success', 'Successfuly created account. Go to e-mail to confirm registration');
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('register/register.html.twig', [
             'form' => $form->createView()

@@ -10,6 +10,7 @@
     <div class="w3-container w3-card w3-white w3-round w3-margin" id="notification-box">
         {% if searchedUsers | length > 0 %}
             {% for i in 0..(searchedUsers | length)-1 %}
+                <br>
                 <center><span>Search result:</span></center>
                 <hr>
                 <div class="row">
@@ -25,7 +26,8 @@
 
             {% endfor %}
         {% else %}
-            User not founded. Enter <span id="colorElement">full name</span> or <span id="colorElement">username</span> to find user
+            <br><br>
+            <center>User not founded. Enter <span id="colorElement">full name</span> or <span id="colorElement">username</span> to find user</center>
         {% endif %}
     </div>
 {% endblock %}

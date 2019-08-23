@@ -12,5 +12,23 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+
+    <div class="accordion" id="accordionExample">
+            <div class="" id="headingOne">
+                <h2 class="mb-0">
+                    <button id="terms-of-service" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        >>> Terms of Service <<<
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card">
+                <div class="card-body">
+                    You must provide valid e-mail adress, to confirm registration. If you do not confirm registration
+                    you will not be able to use aplication.
+                </div>
+                </div>
+            </div>
 {% endblock %}
 {% block footer %}{% endblock %}

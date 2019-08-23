@@ -5,10 +5,10 @@
                     {% if user != app.user %}
                         {% if user.followers.contains(app.user) == false %}
                             <p>Follow this user:</p>
-                            <a href="{{ path('follow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-primary" id="button-fol-unf">Follow</a>
+                            <a href="{{ path('follow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-primary" id="button-fol">Follow</a>
                         {% else %}
                             <p>Unfollow this user:</p>
-                            <a href="{{ path('unfollow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-danger" id="button-fol-unf">Unfollow</a>
+                            <a href="{{ path('unfollow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-danger" id="button-unf">Unfollow</a>
                         {% endif %}
                         {% else %}
                         <p>Number of your twitts</p>
@@ -46,10 +46,10 @@
         <div class="w3-card w3-round w3-white w3-center" id="chart-section">
             <div class="w3-container">
                 <p>Most liked users in % </p>
-                <div class="chart" style="background: conic-gradient(#FAA43A {{ chartStatistic[0]*3.6 }}deg, #5DA5DA {{ chartStatistic[0]*3.6 }}deg {{ chartStatistic[0]*3.6+chartStatistic[2]*3.6 }}deg, #B276B2 0);"></div>
+                <div class="chart" style="background: conic-gradient(#5DA5DA {{ chartStatistic[0]*3.6 }}deg, #FAA43A {{ chartStatistic[0]*3.6 }}deg {{ chartStatistic[0]*3.6+chartStatistic[2]*3.6 }}deg, #B276B2 0);"></div>
                 <br>
                 <div id="pie-chart-percent">
-                <strong class="percent orange">{{ chartStatistic[0]|round }}%</strong>
+                <strong class="percent blue">{{ chartStatistic[0]|round }}%</strong>
                     {% if chartStatistic[0]>0 %}
                     <span class="choice">@{{ chartStatistic[1] }}</span><br><br>
                     {% else %}
@@ -57,7 +57,7 @@
                     {% endif %}
                 </div>
                 <div id="pie-chart-percent">
-                <strong class="percent blue">{{ chartStatistic[2]|round }}%</strong>
+                <strong class="percent orange">{{ chartStatistic[2]|round }}%</strong>
                     {% if chartStatistic[2]>0 %}
                 <span class="choice">@{{ chartStatistic[3] }}</span><br><br>
                     {% else %}

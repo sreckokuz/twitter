@@ -5,12 +5,16 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Services\ChartService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ */
 class SearchController extends AbstractController
 {
 
