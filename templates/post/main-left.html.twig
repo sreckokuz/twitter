@@ -1,10 +1,11 @@
 <div class="w3-container ">
     <div class=" w3-round w3-white ">
         {% if is_granted('ROLE_USER') %}
-        <div class="w3-card" {% if app.user == user and markPage==1 %} {{ "style='border: 2px solid #745A85'" }} {% endif %} id="leftCardProfile">
+        {% if markPage == 1 %}
+            <div class="w3-card" {% if app.user == user and markPage==1 %} {{ "style='border: 2px solid #745A85'" }} {% endif %} id="leftCardProfile">
         <div class="w3-container">
-            {#<p class="w3-center"><img src="" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>#}
             <p class="w3-center">{{ user.fullName }}</p>
+            <p class="w3-center"><img id="prof-pic" src="{{ asset("/images/profile2.jpg") }}" class="w3-circle" style="height:80px;width:80px" alt="Avatar"></p>
             <hr>
             <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ user.job }}</p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{ user.address }}</p>
@@ -14,15 +15,15 @@
             <button class="w3-button-small w3-block w3-green w3-section" data-toggle="modal" data-target="#editProfile"><span class="glyphicon glyphicon-edit"></span></button></a>
             </div>
             {% endif %}
-
-
         </div>
         </div>
+        {% endif %}
+
     </div>
     <br>
 
     <!-- Following -->
-    <div class="w3-card w3-round w3-white w3-hide-small">
+    <div class="w3-card w3-round w3-white w3-hide-small" {% if markPage!=1 %} {{ "style='margin-top: -20px !important'" }} {% endif %} >
         <div class="w3-container">
             <p>Following</p>
                 {% for following in user.following %}
@@ -30,9 +31,7 @@
                 {% endfor %}
         </div>
         <br>
-    </div>
-    <br>
-
+    </div><br>
     <div class="w3-card w3-round w3-white w3-hide-small">
         <div class="w3-container">
             <p>Followers</p>
@@ -57,8 +56,7 @@
         </div>
         <br>
         {% else %}
-            <!-- Alert Box -->
-
+            <!-- Alert Box on front page of non authenicated user-->
             <div id="allert-dialog" class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
           <i class="fa fa-remove"></i>
@@ -67,8 +65,10 @@
                 <p>People are looking at your profile. Find out who.</p>
             </div>
         {% endif %}
+
     </div>
     <br>
 </div>
 </div>
+
 {{ include('post/modalEditProfile.html.twig') }}

@@ -34,16 +34,12 @@ class SearchController extends AbstractController
         $qresult = $this->getDoctrine()->getRepository(User::class)->searchUserByTitle($request->query->get('q'));
 //        dd($qresult);
         /** @var User $user */
-        $user = $this->getUser();
-        $count = $user->getPosts()->count();
-        $allUsers = $this->getDoctrine()->getRepository(User::class)->findAll();
-        $usersWith5PostsAndMore = $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts();
         return $this->render('search/index.html.twig',
                 [
-                    'user' => $user,
-                    'allUsers' => $allUsers,
-                    'count' => $count,
-                    'usersWith5PostsAndMore' => $usersWith5PostsAndMore,
+                    'user' => $this->getUser(),
+                    'allUsers' => $this->getDoctrine()->getRepository(User::class)->findAll(),
+                    'count' => $this->getUser()->getPosts()->count(),
+                    'usersWith5PostsAndMore' => $this->getDoctrine()->getRepository(User::class)->usersWithMoreThan5Posts(),
                     'searchedUsers' => $qresult,
                     'mostLikedPostAndUser' => $this->getDoctrine()->getRepository(Post::class)->mostLikedPostAndHisUser(),
                     'chartStatistic' => $chartService->getMostLikedUsersStatistic()

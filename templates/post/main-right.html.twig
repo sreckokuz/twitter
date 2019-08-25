@@ -1,5 +1,7 @@
 <div class="w3-col m3" id="right-side">
+    {# display follow or unfollow or number of tweets functionality #}
     {% if is_granted('ROLE_USER') %}
+    {% if markPage == 1 %}
         <div class="w3-card w3-round w3-white w3-center">
             <div class="w3-container">
                     {% if user != app.user %}
@@ -11,18 +13,18 @@
                             <a href="{{ path('unfollow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-danger" id="button-unf">Unfollow</a>
                         {% endif %}
                         {% else %}
-                        <p>Number of your twitts</p>
+                        <p>Number of your tweets</p>
                         <h1>{{ count }}</h1>
                     {% endif %}
             </div>
             <br>
         </div>
+        {% endif %}
         <br>
-
-
-        <div class="w3-card w3-round w3-white w3-center">
+        {# show users with more than 5 posts #}
+        <div class="w3-card w3-round w3-white w3-center"{% if markPage!=1 %} {{ "style='margin-top: -20px !important'" }} {% endif %} >
             <div class="w3-container">
-                <p>Users with more than 5 twitts</p>
+                <p>Users with more than 5 tweets</p>
                 {% for user in usersWith5PostsAndMore %}
                 <a href="{{ path("all_user_tweets", {'id': user.id }) }}"><span class="w3-tag w3-theme-d5">@{{ user.username }}</span></a>
                 {% endfor %}
@@ -30,9 +32,10 @@
             <br>
         </div>
         <br>
+        {# one of most liked tweets #}
         <div class="w3-card w3-round w3-white w3-center">
             <div class="w3-container">
-                    <p>One of most liked twett and his author</p>
+                    <p>One of most liked tweet and his author</p>
                 {%    if mostLikedPostAndUser %}
                 <a href="{{ path("show_one_post", {'id': mostLikedPostAndUser['id'] }) }}"><span class="w3-tag w3-theme-d5">twett</span></a> from
                 <a href=""><span class="w3-tag w3-theme-d5">@{{ mostLikedPostAndUser.username }}</span></a>
@@ -43,6 +46,7 @@
             <br>
         </div>
         <br>
+        {# most liked users in % #}
         <div class="w3-card w3-round w3-white w3-center" id="chart-section">
             <div class="w3-container">
                 <p>Most liked users in % </p>
@@ -78,7 +82,7 @@
         </div>
         <br>
     {% else %}
-        <!-- End Right Column -->
+        <!-- Allert Box on front page for non authenticated users -->
         <div class="w3-container">
             <div id="allert-dialog" class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">

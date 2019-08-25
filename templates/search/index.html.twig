@@ -4,6 +4,7 @@
         {{ include('post/main-left.html.twig') }}
     {% endblock %}
     {% block right %}
+        {% set markPage = 5 %}
         {{ include('post/main-right.html.twig')}}
     {% endblock %}
 {% block middle %}
@@ -20,10 +21,8 @@
                     <div class="col-md-6">
                         <center>{{ searchedUsers[i].username }}</center>
                     </div>
-
                 </div>
                 <br>
-
             {% endfor %}
         {% else %}
             <br><br>

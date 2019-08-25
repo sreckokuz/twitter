@@ -24,7 +24,6 @@ class FollowingController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
             //add event to notify user
             $followUser = new FollowNotificationEvent($user, $userToFollow);
             $eventDispatcher->dispatch(FollowNotificationEvent::NAME, $followUser);

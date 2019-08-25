@@ -4,6 +4,7 @@
     {{ include('post/main-left.html.twig') }}
 {% endblock %}
 {% block right %}
+    {% set markPage = 7 %}
     {{ include('post/main-right.html.twig')}}
 {% endblock %}
 {% block middle %}
@@ -13,6 +14,6 @@
         {{ form_end(form) }}
     </div>
     <script>
-        document.getElementById("post_Add").innerHTML = "Edit tweet";
+        document.getElementById("post_Twitt").innerHTML = "Edit tweet";
     </script>
 {% endblock %}

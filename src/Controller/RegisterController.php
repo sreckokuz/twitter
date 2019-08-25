@@ -30,6 +30,7 @@ class RegisterController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            //send email
             $userRegisterEvent = new UserRegisterEvent($user);
             $eventDispatcher->dispatch(UserRegisterEvent::NAME, $userRegisterEvent);
             $this->addFlash('success', 'Successfuly created account. Go to e-mail to confirm registration');

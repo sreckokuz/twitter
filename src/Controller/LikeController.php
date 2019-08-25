@@ -25,6 +25,7 @@ class LikeController extends AbstractController
         $user = $this->getUser();
         $user->addPostsLiked($post);
         $this->getDoctrine()->getManager()->flush();
+        //notification
         if($post->getUser() !== $user) {
             $likedPost = new LikeNotificationEvent($post, $user);
             $eventDispatcher->dispatch(LikeNotificationEvent::NAME, $likedPost);
@@ -40,6 +41,7 @@ class LikeController extends AbstractController
         $user = $this->getUser();
         $post->removeLikedBy($user);
         $this->getDoctrine()->getManager()->flush();
+        //disable notification
         $unlikedPost = new LikeNotificationEvent($post, $user);
         $eventDispatcher->dispatch('post.unliked', $unlikedPost);
         return new JsonResponse(['count'=>$post->getLikedBy()->count()]);

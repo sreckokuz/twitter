@@ -4,11 +4,13 @@
         {{ include('post/main-left.html.twig', {'user': user, 'allUsers': allUsers}) }}
     {% endblock %}
     {% block right %}
+        {% set markPage = 0 %}
         {{ include('post/main-right.html.twig', {'user': user})}}
     {% endblock %}
 {% block middle %}
     {% if is_granted('ROLE_USER') %}
     <div class="w3-container w3-card w3-white w3-round w3-margin">
+        {#form for input tweets#}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
