@@ -13,35 +13,37 @@
                 <center><span>All users:</span></center>
                 <hr>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-title">
                         <center><p>Picture</p></center><hr>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-title">
                         <center><p>Username</p></center><hr>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-title">
                         <center><p>Tweets</p></center><hr>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-title">
                         <center><p>Status</p></center><hr>
                     </div>
                     {% for user in allUsers %}
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-content">
                        <center><img id="prof-pic" src="{{ asset("/images/profile2.jpg") }}" class="w3-circle" style="height:40px;width:40px" alt="Avatar"></p></center>
                     </div>
-                    <div class="col-md-3">
-                        <p class="w3-center">@{{ user.username }}</p>
+                    <div class="col-md-3" id="all-users-content">
+                        <a href="{{ path("all_user_tweets", {'id': user.id}) }}"><p class="w3-center">@{{ user.username }}</p></a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-content">
                         <p class="w3-center">{{ user.posts.count }}</p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="all-users-content">
                         {% if user != app.user %}
                             {% if user.followers.contains(app.user) == false %}
-                                <center><a href="{{ path('follow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-primary" id="button-fol">Follow</a></center>
+                                <center><a href="{{ path('follow_user', {'id': user.id}) }}" id="all-users-follow" class="btn btn-lg btn-outline-primary" >Follow</a></center>
                             {% else %}
-                                <center><a href="{{ path('unfollow_user', {'id': user.id}) }}" class="btn btn-lg btn-outline-danger" id="button-unf">Unfollow</a></center>
+                                <center><a href="{{ path('unfollow_user', {'id': user.id}) }}" id="all-users-unfollow" class="btn btn-lg btn-outline-danger" >Unfollow</a></center>
                             {% endif %}
+                            <hr id="all-users-tag">
+
                         {% else %}
 
                         {% endif %}

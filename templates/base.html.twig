@@ -17,12 +17,12 @@
 <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large" id="nav-manual" >
         <div class="w3-container">
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a id="mobile-menu" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
         <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="nav-title">FAKE TWEET</a>
             {% if is_granted("ROLE_USER") %}
         <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Home"><i class="fa fa-home"></i></a>
         <a href="{{ path('all_user_tweets', {'id': app.user.id}) }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
-            <a href="{{ path("all_users") }}"><button id="notif-button" class="w3-button w3-padding-large allUsers" title="All users"><i class="fa fa-users"></i>
+            <a href="{{ path("all_users") }}"><button id="notif-button" class="w3-button w3-padding-large allUsers" title="All users"><i class="fa fa-users"></i></button>
             <a href="{{ path("show_notifications") }}"><button id="notif-button" class="w3-button w3-padding-large " title="Notifications"><i class="fa fa-bell"></i>
                     <span class="w3-badge w3-right w3-small" id="not-badge"><span id="notification-count"></span></span></button></a>
             <div id="search-form">
@@ -54,10 +54,18 @@
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+    {% if is_granted("ROLE_USER") %}
+    <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="{{ path('all_user_tweets', {'id': app.user.id}) }}" class="w3-bar-item w3-button w3-padding-large">Profile</a>
+    <a href="{{ path("all_users") }}" class="w3-bar-item w3-button w3-padding-large">All users</a>
+    <a href="{{ path("show_notifications") }}" class="w3-bar-item w3-button w3-padding-large">Notifications</a>
+    <a href="{{ path('security_logout') }}" class="w3-bar-item w3-button w3-padding-large">Logout</a>
+    {% else %}
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Login</a>
+        <a href="{{ path('security_login') }}" class="w3-bar-item w3-button w3-padding-large">Login</a>
+        <a href="{{ path('register') }}" class="w3-bar-item w3-button w3-padding-large">Register</a>
+    {% endif %}
 </div>
 
 <!-- Page Container -->

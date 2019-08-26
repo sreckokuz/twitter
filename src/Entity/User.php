@@ -29,7 +29,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Length(max=7, min="4")
+     * @Assert\Length(max=7, min="4", maxMessage="his value is too long. It should have less than 7 characters. ")
      */
     private $username;
 
@@ -40,7 +40,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(min=7, max=30)
+     * @Assert\Length(min=6, max=30)
      */
     private $plainPassword;
 
@@ -119,6 +119,12 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="text", nullable=true)
      */
     private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={"image/jpeg"})
+     */
+    private $image;
 
     public function __construct()
     {
@@ -539,5 +545,17 @@ class User implements AdvancedUserInterface, \Serializable
     public function isEnabled()
     {
         return $this->enabled;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

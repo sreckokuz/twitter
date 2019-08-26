@@ -155,10 +155,12 @@ class PostController extends AbstractController
         $town = $request->request->get('town');
         $job = $request->request->get('job');
         $birth = $request->request->get('birth');
-        $dateOfBirth = new \DateTime($birth);
+        if (isset($birth)){
+            $dateOfBirth = new \DateTime($birth);
+            $user->setBirth($dateOfBirth);
+        }
 //        dd($dateOfBirth);
 //        die();
-        $user->setBirth($dateOfBirth);
         $user->setJob($job);
         $user->setAddress($town);
         $this->getDoctrine()->getManager()->flush();

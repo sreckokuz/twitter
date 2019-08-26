@@ -7,6 +7,7 @@ use App\Entity\LikeNotification;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Services\ChartService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,6 +15,7 @@ class AllUsersController extends AbstractController
 {
     /**
      * @Route("/all/users", name="all_users")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function index(ChartService $chartService)
     {

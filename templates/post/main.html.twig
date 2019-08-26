@@ -1,4 +1,4 @@
-<div class="w3-container w3-card w3-white w3-round w3-margin" style="position:relative;"><br>
+<div class="w3-container w3-card w3-white w3-round w3-margin" style="position:relative; {% if not is_granted("ROLE_USER") %} border: 2px solid #745A85; {% else %} border: none;{% endif %}"><br>
     {#<img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">#}
     <span class="w3-right w3-opacity">{{ carbon.create(post.createdAt|date).diffForHumans() }}</span>
         <a href="{{ path("all_user_tweets", {'id': post.user.id}) }}"><h4>@{{  post.user.username }}</h4></a>
