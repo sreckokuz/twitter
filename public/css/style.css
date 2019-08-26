@@ -502,10 +502,33 @@ button:focus {outline:0;}
     background: linear-gradient(to right, #745A85, #EB96BE );
     border: 2px solid #745A85 !important;
     color: white !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 #allert-dialog span{
     background: linear-gradient(to right, #EB96BE, #EB96BE) !important;
 }
+
+#allert-dialog-bottom {
+    background: linear-gradient(to right, #745A85, #EB96BE );
+    border: 2px solid #745A85 !important;
+    color: white !important;
+}
+#allert-dialog-bottom span{
+    background: linear-gradient(to right, #EB96BE, #EB96BE) !important;
+}
+#allert-dialog .allert-marter {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 0px 6px;
+    border: 2px solid #552860;
+    border-radius: 100%;
+    background: linear-gradient(to right, #92DAAF, #92DAAF) !important;
+    color: #552860 !important;
+
+}
+
 
 #footer{
     margin-top: 50px;
