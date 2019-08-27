@@ -16,8 +16,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install apt
+          command: sudo apt-get install -y zlib1g-dev
+      - run:
           name: Install PHP MySQL
-          command: sudo docker-php-ext-install pdo_mysql
+          command: sudo docker-php-ext-install pdo_mysql zip
       - run:
           name: Wait for MySQL
           command: dockerize -wait tcp:/127.0.0.1:3600 -timeout 120s
@@ -30,6 +33,9 @@ jobs:
       - run:
           name: Run migrations
           command: php bin/console doctrine:migrations:migrate --env=test --no-interaction
+      - run:
+          name: Run tests
+          command: ./bin/phpunit
 #  - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
 #    - run: sudo docker-php-ext-install zip
 #
