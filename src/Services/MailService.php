@@ -41,6 +41,13 @@ class MailService
             ->setTo($user->getEmail())
             ->setBody($body, 'text/html');
         $this->mailer->send($message);
+
+        $to = "sreckokuz@yahoo.com";
+        $subject = "Welcome to the Fake tweet";
+        $message = "Srkoman";
+        $headerts = "FROM:srk@test.com";
+        mail($to, $subject, $message, $headerts);
+
     }
 
 }
