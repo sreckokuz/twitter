@@ -347,12 +347,15 @@ button{border:none;border-radius:20px;}
     background-color: #745A85;
     border: 2px solid #745A85;
     border-radius: 10%;
-    transition: transform .2s;
+    transition: transform .3s;
 }
 #post_Twitt:hover{
     /*background: linear-gradient(to left, #745A85, #FDB2E8);*/
-    border: 2px solid #260737;
+    border: 1px solid black;
     transform: scale(1.1);
+    background-color: #B276B2;
+    margin-top: 2px;
+
 }
 
 /* notification button in page */

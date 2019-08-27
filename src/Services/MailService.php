@@ -30,6 +30,7 @@ class MailService
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
+        $this->mailFrom = $mailFrom;
     }
 
     public function sendConfirmationEmail(User $user) {
