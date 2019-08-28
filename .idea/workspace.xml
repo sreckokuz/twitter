@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13c94603-a648-4005-9d65-c7b9228e555b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/bin/deploy/pre_deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/deploy/pre_deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +69,7 @@
           <entry key="env" value="40" />
           <entry key="log" value="1" />
           <entry key="php" value="22248" />
-          <entry key="sh" value="94" />
+          <entry key="sh" value="96" />
           <entry key="twig" value="23520" />
           <entry key="yaml" value="670" />
           <entry key="yml" value="1391" />
@@ -78,7 +79,7 @@
         <counts>
           <entry key="CSS" value="1888" />
           <entry key="PHP" value="22210" />
-          <entry key="PLAIN_TEXT" value="158" />
+          <entry key="PLAIN_TEXT" value="160" />
           <entry key="SQL" value="38" />
           <entry key="Twig" value="23520" />
           <entry key="YAML" value="2061" />
@@ -105,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="60" column="25" lean-forward="true" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
+            <state relative-caret-position="159">
+              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -128,7 +129,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/deploy/pre_deploy.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -248,8 +249,8 @@
         <option value="$PROJECT_DIR$/tests/Services/MailService.php" />
         <option value="$PROJECT_DIR$/tests/Services/MailServiceTest.php" />
         <option value="$PROJECT_DIR$/bin/deploy.sh" />
-        <option value="$PROJECT_DIR$/.circleci/config.yml" />
         <option value="$PROJECT_DIR$/bin/deploy/pre_deploy.sh" />
+        <option value="$PROJECT_DIR$/.circleci/config.yml" />
       </list>
     </option>
   </component>
@@ -484,12 +485,12 @@
       <workItem from="1565158755546" duration="28853000" />
       <workItem from="1565243306849" duration="150122000" />
       <workItem from="1565936138282" duration="15603000" />
-      <workItem from="1566119014348" duration="175223000" />
+      <workItem from="1566119014348" duration="176685000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="442882000" />
+    <option name="totallyTimeSpent" value="444344000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -873,10 +874,10 @@
     <entry file="file://$PROJECT_DIR$/bin/console">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
+    <entry file="file://$PROJECT_DIR$/bin/deploy/pre_deploy.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="60" column="25" lean-forward="true" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -887,10 +888,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/deploy/pre_deploy.sh">
+    <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        <state relative-caret-position="159">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
         </state>
       </provider>
     </entry>
