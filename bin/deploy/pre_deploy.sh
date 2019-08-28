@@ -1,4 +1,5 @@
 # Remove symlink
+sudo rm -R /var/www/twitter_old && \
 sudo cp -R /var/www/twitter_current /var/www/twitter_old/ && \
 sudo rm /var/www/twitter && \
 sudo rm -R /var/www/twitter_current && \
