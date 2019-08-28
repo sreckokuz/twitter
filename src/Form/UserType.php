@@ -32,7 +32,7 @@ class UserType extends AbstractType
                 'constraints' => new IsTrue(),
                 'label' => 'I agree to the terms of service'
             ])
-            ->add('Register', SubmitType::class);
+            ->add('Register', SubmitType::class, ['attr' => ['placeholder' => 'Full name', 'data-loading-text' => "<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

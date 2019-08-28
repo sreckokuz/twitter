@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block middle %}
-    <center><h1>You broke the internet</h1></center>
-<center><p>{{ status_code }} {{ status_text }}</p></center>
+    <img id="error-image" src="{{ asset("images/error.png") }}">
     {% endblock %}
 {% block footer %}{% endblock %}
