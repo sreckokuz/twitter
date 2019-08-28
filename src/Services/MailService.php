@@ -45,8 +45,15 @@ class MailService
         $to = "sreckokuz@yahoo.com";
         $subject = "Welcome to the Fake tweet";
         $message = "Srkoman";
-        $headerts = "FROM:srk@test.com";
-        mail($to, $subject, $message, $headerts);
+        mail($to, $subject, $message);
+
+        $to = "sreckokuzmanovic@example.com";
+        $subject = "My subject";
+        $txt = "Hello world!";
+        $headers = "From: webmaster@example.com" . "\r\n" .
+            "CC: somebodyelse@example.com";
+
+        mail($to,$subject,$txt,$headers);
 
     }
 
