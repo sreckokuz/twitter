@@ -30,7 +30,7 @@ class UserType extends AbstractType
             ->add('termsAgreed', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => new IsTrue(),
-                'label' => 'I agree to the terms of service'
+                'label' => 'I agree to the Terms of Service'
             ])
             ->add('Register', SubmitType::class, ['attr' => ['placeholder' => 'Full name', 'data-loading-text' => "<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order"]]);
     }

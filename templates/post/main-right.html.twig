@@ -83,23 +83,33 @@
         <br>
     {% else %}
         <!-- Allert Box on front page for non authenticated users -->
-            <div id="allert-dialog" class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+            <div id="allert-dialog" class="w3-container notice1 w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
           <i class="fa fa-remove"></i>
         </span>
-                <p>As visitor you can see all tweets.</p><p> As user you can see tweets only of users that you follow. </p><p>As admin you can edit and delete tweets of all users</p>
+                <p>As visitor you only can see all tweets.</p><p> As user you can tweet, see tweets only of users that you follow, follow
+                    users, like there tweets... </p><p>As admin you can edit and delete tweets of all users.</p>
                 <p>If you do not want to register use one of demo acconts to log in, and explore aplication.</p>
-                <span class="allert-marter">2</span>
+                {#<span class="allert-marter">2</span>#}
             </div>
 
-            <div id="allert-dialog" class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+            <div id="allert-dialog" class="w3-container notice2 w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
           <i class="fa fa-remove"></i>
         </span>
                 <p>Demo accounts:</p>
                 <p><u>User:</u></p><p> username: john_doe,</p><p> password: john_doe123</p>
                 <p><u>Admin:</u></p><p> username: admin,<p></p> password: admin123</p>
-                <span class="allert-marter">3</span>
+                {#<span class="allert-marter">3</span>#}
             </div>
     {% endif %}
 </div>
+
+<script>
+    setTimeout(function(){
+        $('.notice1').fadeIn(3000);
+    }, 4000);
+    setTimeout(function(){
+        $('.notice2').fadeIn(3000);
+    }, 8000);
+</script>

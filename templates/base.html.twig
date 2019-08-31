@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <link href="{{ asset("css/style.css") }}" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 
 
 <body class="w3-theme-l5">
@@ -21,10 +23,10 @@
         <a id="mobile-menu" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
         <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="nav-title">FAKE TWEET</a>
             {% if is_granted("ROLE_USER") %}
-        <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Home"><i class="fa fa-home"></i></a>
-        <a href="{{ path('all_user_tweets', {'id': app.user.id}) }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></a>
-            <a href="{{ path("all_users") }}"><button id="notif-button" class="w3-button w3-padding-large allUsers" title="All users"><i class="fa fa-users"></i></button>
-            <a href="{{ path("show_notifications") }}"><button id="notif-button" class="w3-button w3-padding-large " title="Notifications"><i class="fa fa-bell"></i>
+        <a href="{{ path('main_page') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="nav1" title="Home"><i class="fa fa-home"></i></a>
+        <a href="{{ path('all_user_tweets', {'id': app.user.id}) }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id="nav2" title="Profile"><i class="fa fa-user"></i></a>
+            <a id="nav-el-notif" href="{{ path("all_users") }}"><button id="notif-button" class="w3-button w3-padding-large allUsers" title="All users"><i class="fa fa-users"></i></button>
+            <a href="{{ path("show_notifications") }}"><button id="notif-button1" class="w3-button w3-padding-large " id="nav4" title="Notifications"><i class="fa fa-bell"></i>
                     <span class="w3-badge w3-right w3-small" id="not-badge"><span id="notification-count"></span></span></button></a>
             <div id="search-form">
             <form class="search" action="{{ path("search") }}" method="get">
@@ -107,7 +109,7 @@
 {% block footer %}
 
 <footer id="footer" class="w3-container w3-theme-d5">
-    <center> <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Srecko</a></p></center>
+    <center> <p>Powered by <a href="https://sreckokuz.github.io/online_CV/" target="_blank">Srecko</a></p></center>
 </footer>
 
 {% endblock %}
@@ -143,6 +145,25 @@
         }
         fetchNotificationCount()
         {% endif %}
+
+        // add active class to nav-menu if user us in current page
+        var path = window.location.pathname.split("/").pop();
+        // console.log(path);
+        var target1 = document.getElementById('nav1');
+        var target2 = document.getElementById('nav2');
+        var target3 = document.getElementById('notif-button');
+        var target4 = document.getElementById('notif-button1');
+        if (path=='') {
+            target1.classList.add('active-menu');
+        }if (path==1){
+            target2.classList.add('active-menu');
+        }if (path=='users'){
+            target3.classList.add('active-menu');
+        }
+        if (path=='show'){
+            target4.classList.add('active-menu');
+        }
+
     </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
