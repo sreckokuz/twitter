@@ -634,7 +634,10 @@ button:focus {outline:0;}
 #all-users-tag {
     border-bottom: 0.5px solid #4E2059 !important;
 }
-
+#user_termsAgreed {
+    height: 20px;
+    width: 20px;
+}
 /* media query */
 
 @media (max-width: 500px) {
