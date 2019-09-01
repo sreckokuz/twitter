@@ -9,7 +9,7 @@
             <hr>
             <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ user.job }}</p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{ user.address }}</p>
-            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ user.birth|date('d F, Y ') }}</p>
+            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {% if user.birth is not null %}{{ user.birth|date('d F, Y ') }} {% endif %}</p>
             {%  if markPage ==1 and app.user == user%}
             <div class="post-right-buttons">
             <button class="w3-button-small w3-block w3-green w3-section" data-toggle="modal" data-target="#editProfile"><span class="glyphicon glyphicon-edit"></span></button></a>
@@ -49,7 +49,7 @@
     <!-- All users -->
     <div id="listOfUsers" class="w3-card w3-round w3-white w3-hide-small">
         <div class="w3-container">
-            <p id="rand-users">Some recomended users:</p>
+            <p id="rand-users">Some of users:</p>
             {% set count = 0 %}
             {% for user in allUsers %}
                 {% if count<4 %}

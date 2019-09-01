@@ -25,7 +25,7 @@ class Post
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Length(min=5, max=100, minMessage="Minimum length is 5 characters", maxMessage="Maximum length is 100 characters")
+     * @Assert\Length(min=5, max=150, minMessage="Minimum length is 5 characters", maxMessage="Maximum length is 150 characters")
      */
     private $content;
 

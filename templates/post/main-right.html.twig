@@ -38,7 +38,7 @@
                     <p>One of most liked tweet and his author</p>
                 {%    if mostLikedPostAndUser %}
                 <a href="{{ path("show_one_post", {'id': mostLikedPostAndUser['id'] }) }}"><span class="w3-tag w3-theme-d5">twett</span></a> from
-                <a href=""><span class="w3-tag w3-theme-d5">@{{ mostLikedPostAndUser.username }}</span></a>
+                <a href="{{ path("all_user_tweets", {'id': user.id}) }}"><span class="w3-tag w3-theme-d5">@{{ mostLikedPostAndUser.username }}</span></a>
                 {% else %}
                     <span class="w3-tag w3-theme-d5">No liked tweets</span>
                     {% endif %}
@@ -89,7 +89,7 @@
         </span>
                 <p>As visitor you only can see all tweets.</p><p> As user you can tweet, see tweets only of users that you follow, follow
                     users, like there tweets... </p><p>As admin you can edit and delete tweets of all users.</p>
-                <p>If you do not want to register use one of demo acconts to log in, and explore aplication.</p>
+                <p>If you do not want to register use demo acconts to log in and explore aplication.</p>
                 {#<span class="allert-marter">2</span>#}
             </div>
 
@@ -98,8 +98,8 @@
           <i class="fa fa-remove"></i>
         </span>
                 <p>Demo accounts:</p>
-                <p><u>User:</u></p><p> username: john_doe,</p><p> password: john_doe123</p>
-                <p><u>Admin:</u></p><p> username: admin,<p></p> password: admin123</p>
+                <p><u>Role user:</u></p><p> username: john,</p><p> password: john123</p>
+                <p><u>Role user:</u></p><p> username: smith,</p><p> password: smith123</p>
                 {#<span class="allert-marter">3</span>#}
             </div>
     {% endif %}
