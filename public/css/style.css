@@ -526,6 +526,7 @@ button:focus {outline:0;}
     color: #745A85 !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
+    text-align: justify;
 }
 #allert-dialog span{
     background-color: rgb(251,251,254) !important;
