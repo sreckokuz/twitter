@@ -21,6 +21,14 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <input type="hidden" name="_target_path" value="{{ app.request.get('redirect') }}">
     </form>
+        <div id="mobile-login-message">
+            <p>if you do not have account use one of demo accounts:</p>
+            <p><u>username:</u> john</p>
+            <p><u>password:</u> john123</p>
+            <p>-----------------------</p>
+            <p><u>username:</u> smith</p>
+            <p><u>password:</u> smith123</p>
+        </div>
 
 {% endblock %}
 {% block footer %} {% endblock %}

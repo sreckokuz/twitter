@@ -10,7 +10,6 @@ namespace App\Services;
 
 
 use App\Entity\User;
-
 class MailService
 {
     /**
@@ -41,7 +40,7 @@ class MailService
             ->setTo($user->getEmail())
             ->setBody($body, 'text/html');
         $this->mailer->send($message);
-
     }
+
 
 }
