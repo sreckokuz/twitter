@@ -499,7 +499,7 @@ button:focus {outline:0;}
     transition: transform 0.2s;
     /*background-color: rgba(200,213,228) !important;*/
 }
-
+allert-dialog
 
 #unlike:hover {
     transform: scale(1.1);
