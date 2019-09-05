@@ -83,25 +83,24 @@
         <br>
     {% else %}
         <!-- Allert Box on front page for non authenticated users -->
-            <div id="allert-dialog" class="w3-container notice1 w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
-          <i class="fa fa-remove"></i>
-        </span>
-                <p>As visitor you only can see all tweets.</p><p> As user you can tweet, see tweets only of users that you follow, follow
-                    users, like there tweets... </p><p>As admin you can edit and delete tweets of all users.</p>
-                <p>If you do not want to register use demo acconts to log in and explore aplication.</p>
-                {#<span class="allert-marter">2</span>#}
-            </div>
 
             <div id="allert-dialog" class="w3-container notice2 w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
           <i class="fa fa-remove"></i>
         </span>
-                <p>Demo accounts:</p>
+                <p>If you do not want to register use demo accounts to log in and explore application:</p>
                 <p><u>Role user:</u></p><p> username: john</p><p> password: john123</p>
                 <p><u>Role user:</u></p><p> username: smith</p><p> password: smith123</p>
                 {#<span class="allert-marter">3</span>#}
             </div>
+        <div id="allert-dialog" class="w3-container notice1 w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+          <i class="fa fa-remove"></i>
+        </span>
+            <p>As visitor you only can see all tweets.</p><p> As user you can tweet, see tweets only of users that you follow, follow
+                users, like there tweets... </p><p>As admin you can edit and delete tweets of all users.</p>
+            {#<span class="allert-marter">2</span>#}
+        </div>
     {% endif %}
 </div>
 
