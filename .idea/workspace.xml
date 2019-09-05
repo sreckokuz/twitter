@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13c94603-a648-4005-9d65-c7b9228e555b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/post/main-right.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/main-right.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,7 +70,7 @@
           <entry key="log" value="1" />
           <entry key="php" value="22449" />
           <entry key="sh" value="105" />
-          <entry key="twig" value="26659" />
+          <entry key="twig" value="26667" />
           <entry key="yaml" value="670" />
           <entry key="yml" value="1393" />
         </counts>
@@ -82,7 +81,7 @@
           <entry key="PHP" value="22411" />
           <entry key="PLAIN_TEXT" value="173" />
           <entry key="SQL" value="38" />
-          <entry key="Twig" value="26659" />
+          <entry key="Twig" value="26667" />
           <entry key="YAML" value="2063" />
         </counts>
       </usages-collector>
@@ -93,8 +92,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/post/main-right.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
+            <state relative-caret-position="171">
+              <caret line="90" column="84" selection-start-line="90" selection-start-column="84" selection-end-line="90" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -574,12 +573,12 @@
       <workItem from="1566119014348" duration="224891000" />
       <workItem from="1567432485079" duration="4562000" />
       <workItem from="1567516598002" duration="24000" />
-      <workItem from="1567528154485" duration="1556000" />
+      <workItem from="1567528154485" duration="2062000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="498692000" />
+    <option name="totallyTimeSpent" value="499198000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -938,8 +937,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/post/main-right.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
+        <state relative-caret-position="171">
+          <caret line="90" column="84" selection-start-line="90" selection-start-column="84" selection-end-line="90" selection-end-column="84" />
         </state>
       </provider>
     </entry>
