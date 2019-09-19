@@ -26,11 +26,6 @@
 
     var likeButton = document.getElementById('like');
     var unlikeButton = document.getElementById('unlike');
-    function switchButtons(button, opositeButton) {
-        button.disabled = false;
-        button.style.display = 'none';
-        opositeButton.style.display= 'inline';
-    }
     function likedPost(id) {
         var post_id = id;
         var likeCount = document.getElementById('like-count').innerText;
